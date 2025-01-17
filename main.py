@@ -47,15 +47,17 @@ def process_input(user_input):
 
 def add_income():
     income = input('Enter amount: ')
+    category = "Income"  # Hard-coded category value
     description = input('Description: ') 
-    date = input('Enter the date (YYYY-MM-DD) or press Enter to use current date: ')
+    date = input('Enter the date (YYYY-MM-DD)')
 
     try:
         # Insert income data into the table
-        cur.execute('INSERT INTO expense_tracker (income, description, date) VALUES (?, ?, ? )', 
-                    (float(income), description, date))
+        cur.execute('INSERT INTO expense_tracker (income, category, description, date) VALUES (?, ?, ?, ? )', 
+                    (float(income), category, description, date))
         con.commit()
         print("Income added successfully!\n")
+        
         
     except sqlite3.Error as e:
         print(f"An error occurred: {e}")
@@ -65,14 +67,16 @@ def add_income():
 def display_income():
     try:
         # Query the database to fetch only income records (where income > 0)
-        cur.execute("SELECT id, income, description, date FROM expense_tracker WHERE income > 0")
+        cur.execute("SELECT id, income, category, description, date FROM expense_tracker WHERE income > 0")
         rows = cur.fetchall()
 
         # Check if there are any income records
         if rows:
-            print("Income Records:\n")
-            for row in rows:  
-                print(f"{row[0]}. Income  €{row[1]}  Added on: {row[3]}  Description: {row[2]}")
+            print("\nID | Amount | Category  | Date            | Description")
+            print("-" * 70)  # Line to separate the header from the data
+
+            for row in rows: # Loop through each row and display in the desired format
+                print(f"{row[0]:<3}  €{row[1]:<6}  {row[2]:<9}   {row[4]}        {row[3]}")
         else:
             print("No income records found.")
     except sqlite3.Error as e:

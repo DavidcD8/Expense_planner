@@ -25,7 +25,7 @@ def menu():
     print(' Expense Tracker')
     print('==================\n')
     print('1. Add data')
-    print('2. Display income')    
+    print('2. Display Records')    
     user_input = input("Choose an option: ")
 
     if not user_input.isdigit() or int(user_input) not in range(1, 4):
@@ -91,11 +91,11 @@ def display_income():
 
         # Check if there are any income records
         if rows:
-            print("\nID | Amount | Category    | Date        | Description")
+            print("\nID | Amount   | Category      | Date          | Description")
             print("-" * 70)  # Line to separate the header from the data
 
             for row in rows: # Loop through each row and display in the desired format
-                print(f"{row[0]:<3} €{row[1]:<8} {row[2]:<11}   {row[4]:<12}  {row[3]}")
+                print(f"{row[0]:<3}| €{row[1]:<8}| {row[2]:<11}   | {row[4]:<12}  | {row[3]}")
 
         else:
             print("No income records found.")
@@ -112,5 +112,4 @@ def main():
 
 if __name__ == '__main__':
     main()
-
 

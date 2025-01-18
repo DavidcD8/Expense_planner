@@ -24,13 +24,12 @@ Use of textwrap for wrapping long descriptions in the display.
    ```bash
    python main.py
    ```
-
 ## Table Schema
 
 The `expense_tracker` table is used to store transaction data:
 
 | Column Name       | Data Type | Description                                    |
-|--------------------------------------------                                    |
+|-------------------|-----------|------------------------------------------------|
 | `id`              | INTEGER   | Primary key, auto-incremented.                 |
 | `transaction_type`| TEXT      | Name of the transaction (Income or Expense).   |
 | `subcategory`     | TEXT      | Specific category, e.g., Salary, Utilities.    |
